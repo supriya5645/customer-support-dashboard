@@ -155,7 +155,7 @@ src/
 
 ## AI Usage
 
-This project was built with the assistance of **Antigravity AI** (powered by Google Gemini / Claude Sonnet), used as a coding agent to:
+This project was built with the assistance of AI tools (ChatGPT, Claude, GitHub Copilot), used to:
 - Scaffold the project structure and file layout
 - Generate React components with TypeScript
 - Implement Zustand state management
