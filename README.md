@@ -163,4 +163,3 @@ This project was built with the assistance of AI tools (ChatGPT, Claude), used t
 - Generate mock ticket data and conversation history
 - Debug TypeScript and build errors
 
-All code has been reviewed and understood by the author.
