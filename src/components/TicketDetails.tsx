@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTicketStore } from '../store';
-import { X, Send, Clock, AlertCircle, Mail, UserCircle2 } from 'lucide-react';
+import { X, Send, Clock, AlertCircle, Mail, UserCircle2, MessageSquare } from 'lucide-react';
 import { format } from 'date-fns';
 
 export function TicketDetails({ ticketId, onClose }: { ticketId: string; onClose: () => void }) {
