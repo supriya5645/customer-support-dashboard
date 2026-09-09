@@ -101,6 +101,58 @@ src/
 
 ---
 
+## How It Works — Application Workflow
+
+### Data Flow
+```
+1. App loads
+       ↓
+2. App.tsx → useEffect → calls fetchTickets()
+       ↓
+3. api.ts → simulates 800ms network delay → returns mock tickets[]
+       ↓
+4. store.ts (Zustand) → stores tickets[], sets isLoading = false
+       ↓
+5. App.tsx re-renders → shows Stats Cards + Ticket Table
+       ↓
+6. User interactions update Zustand state → UI re-renders automatically
+```
+
+### User Interactions
+| User Action | What Happens Internally |
+|---|---|
+| Type in search box | `setSearchQuery()` → `filteredTickets` recalculates → table updates |
+| Select status filter | `setStatusFilter()` → `filteredTickets` recalculates → table updates |
+| Select priority filter | `setPriorityFilter()` → `filteredTickets` recalculates → table updates |
+| Click status dropdown on row | `updateTicketStatus()` → updates ticket in store → badge color changes |
+| Click a ticket row | `setSelectedTicketId()` → TicketDetails side panel slides in |
+| Send a reply in panel | `addMessage()` → new message appended to ticket → chat bubble appears |
+| Click X or dark overlay | `setSelectedTicketId(null)` → side panel slides out |
+| Click "Clear filters" | Resets `searchQuery`, `statusFilter`, `priorityFilter` to defaults |
+
+### Component Roles
+| Component | Responsibility |
+|---|---|
+| `App.tsx` | Main page — navbar, stat cards, filter bar, ticket table |
+| `store.ts` | Global Zustand state — single source of truth for all data |
+| `api.ts` | Data layer — mock API simulating a real async REST API call |
+| `TicketDetails.tsx` | Side panel — full ticket info, status change, conversation thread |
+
+### Zustand Store State Shape
+```ts
+{
+  tickets[],          // all fetched ticket data
+  isLoading,          // shows/hides loading spinner
+  error,              // shows/hides error message
+  searchQuery,        // live search input value
+  statusFilter,       // current status dropdown value
+  priorityFilter,     // current priority dropdown value
+  selectedTicketId,   // ID of open ticket (null = panel closed)
+}
+```
+
+---
+
 ## AI Usage
 
 This project was built with the assistance of **Antigravity AI** (powered by Google Gemini / Claude Sonnet), used as a coding agent to:
